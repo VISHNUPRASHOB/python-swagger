@@ -10,7 +10,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      id-token: write  # ✅ Required for Azure login
+      contents: read   # ✅ Required for checkout
 
     steps:
       - name: Checkout GitHub repository
@@ -19,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'  # or 3.11 if you want, but make sure compatible
+          python-version: '3.9'
 
       - name: Install dependencies
         run: |
@@ -40,4 +41,4 @@ jobs:
         with:
           app-name: 'testazureflask'
           slot-name: 'Production'
-          package: .  # 👈 Deploy the whole repo directly
+          package: .  # 👈 Deploys everything in repo
