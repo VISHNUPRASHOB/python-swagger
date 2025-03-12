@@ -7,7 +7,6 @@ Created on Thu Mar 13 01:36:29 2025
 
 from flask import Flask, jsonify, request
 from flasgger import Swagger
-from waitress import serve
 
 app = Flask(__name__)
 
@@ -64,8 +63,5 @@ def add_numbers():
     return jsonify({"sum": a + b})
 
 
-#if __name__ == "__main__":
-   
-#    app.run(host="127.0.0.1", port=8080, debug=True, use_reloader=False, threaded=True)
-if __name__ == '__main__':
-    serve(app, host="127.0.0.1", port=8081)
+# Azure expects gunicorn to run this file as `gunicorn local-flask-test:app`
+# No need for waitress here; gunicorn will handle WSGI server in Azure.
