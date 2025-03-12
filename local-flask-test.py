@@ -65,3 +65,6 @@ def add_numbers():
 
 # Azure expects gunicorn to run this file as `gunicorn local-flask-test:app`
 # No need for waitress here; gunicorn will handle WSGI server in Azure.
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+
